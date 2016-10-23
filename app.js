@@ -43,13 +43,13 @@ app.post('/', function(req, res) {
     github.issues.create({
         owner: GITHUB_OWNER,
         repo: GITHUB_REPO,
-        title: req.body.text
+        title: req.body.text.replace('ocad ', '')
     });
 
     slack.webhook({
         channel: '#ocad',
         username: 'OCAD_BOT',
-        text: '你媽知道你一天發一篇廢文嗎？(' + issueUrl + ')'
+        text: 'One contribution a day! (' + issueUrl + ')'
     }, function(err, response) {
        console.log(req.body.user_name + ': ' + req.body.text);
     });
